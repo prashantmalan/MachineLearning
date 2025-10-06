@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayesian Classification in Finance - Mind Map</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .mindmap-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .central-node {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            margin: 30px;
+            transform: scale(1.1);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .branch-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .branch {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .branch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .branch-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+        }
+        
+        .theory { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .implementation { background: linear-gradient(135deg, #00cec9, #00b894); }
+        .performance { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        .applications { background: linear-gradient(135deg, #fd79a8, #e84393); }
+        .insights { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .checklist { background: linear-gradient(135deg, #55a3ff, #003d82); }
+        
+        .sub-item {
+            background: #f8f9fa;
+            margin: 8px 0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 4px solid;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .theory-item { border-left-color: #74b9ff; }
+        .implementation-item { border-left-color: #00cec9; }
+        .performance-item { border-left-color: #fdcb6e; }
+        .applications-item { border-left-color: #fd79a8; }
+        .insights-item { border-left-color: #a29bfe; }
+        .checklist-item { border-left-color: #55a3ff; }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .metric {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #e17055;
+        }
+        
+        .connection-line {
+            position: absolute;
+            background: linear-gradient(90deg, #74b9ff, #a29bfe);
+            height: 3px;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .branch-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .title {
+                font-size: 1.8em;
+            }
+            
+            .central-node {
+                font-size: 1.1em;
+                padding: 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mindmap-container">
+        <h1 class="title">🧠 Bayesian Classification in Finance</h1>
+        
+        <div class="mindmap">
+            <div class="central-node">
+                🎯 Bayesian Finance ML<br>
+                <small>Probabilistic Stock & Credit Prediction</small>
+            </div>
+            
+            <div class="branch-container">
+                <!-- Theory Branch -->
+                <div class="branch">
+                    <div class="branch-title theory">
+                        <span class="emoji">📚</span>Bayesian Theory
+                    </div>
+                    <div class="sub-item theory-item">
+                        <strong>Bayes' Theorem:</strong><br>
+                        P(class|features) = P(features|class) × P(class) / P(features)
+                    </div>
+                    <div class="sub-item theory-item">
+                        <span class="emoji">🎲</span><strong>Prior Knowledge:</strong> Base rates & domain expertise
+                    </div>
+                    <div class="sub-item theory-item">
+                        <span class="emoji">📊</span><strong>Likelihood:</strong> P(features|class) - Gaussian distributions
+                    </div>
+                    <div class="sub-item theory-item">
+                        <span class="emoji">🎯</span><strong>Posterior:</strong> Updated probabilities after evidence
+                    </div>
+                    <div class="sub-item theory-item">
+                        <span class="emoji">🔄</span><strong>Independence:</strong> Naive assumption for tractability
+                    </div>
+                </div>
+                
+                <!-- Implementation Branch -->
+                <div class="branch">
+                    <div class="branch-title implementation">
+                        <span class="emoji">⚙️</span>Implementation
+                    </div>
+                    <div class="sub-item implementation-item">
+                        <span class="emoji">🐍</span><strong>From Scratch:</strong> Pure NumPy implementation
+                    </div>
+                    <div class="sub-item implementation-item">
+                        <span class="emoji">📈</span><strong>Features:</strong> Market Cap, P/B, ROE, Momentum
+                    </div>
+                    <div class="sub-item implementation-item">
+                        <span class="emoji">⏱️</span><strong>Time Split:</strong> Chronological train/test (70/30)
+                    </div>
+                    <div class="code-snippet">
+class SimpleNaiveBayes:
+    def fit(self, X, y):
+        # Calculate priors & likelihoods
+        self.class_priors = {}
+        self.feature_stats = {}
+                    </div>
+                    <div class="sub-item implementation-item">
+                        <span class="emoji">⚡</span><strong>Speed:</strong> Millisecond predictions
+                    </div>
+                </div>
+                
+                <!-- Performance Branch -->
+                <div class="branch">
+                    <div class="branch-title performance">
+                        <span class="emoji">📊</span>Performance Results
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <strong>56.8%</strong><br>Accuracy
+                        </div>
+                        <div class="metric">
+                            <strong>+6.8%</strong><br>vs Random
+                        </div>
+                    </div>
+                    <div class="sub-item performance-item">
+                        <span class="emoji">🏆</span><strong>Best Predictor:</strong> ROE (Return on Equity)
+                    </div>
+                    <div class="sub-item performance-item">
+                        <span class="emoji">📉</span><strong>Feature Correlations:</strong> ROE (+0.168), P/B (-0.074)
+                    </div>
+                    <div class="sub-item performance-item">
+                        <span class="emoji">⚖️</span><strong>Business Value:</strong> Beats random baseline consistently
+                    </div>
+                    <div class="highlight">
+                        <strong>Key Insight:</strong> Small improvements in noisy financial data are economically significant!
+                    </div>
+                </div>
+                
+                <!-- Applications Branch -->
+                <div class="branch">
+                    <div class="branch-title applications">
+                        <span class="emoji">💼</span>Business Applications
+                    </div>
+                    <div class="sub-item applications-item">
+                        <span class="emoji">📈</span><strong>Stock Screening:</strong> Identify outperformers
+                    </div>
+                    <div class="sub-item applications-item">
+                        <span class="emoji">💳</span><strong>Credit Risk:</strong> Default probability assessment
+                    </div>
+                    <div class="sub-item applications-item">
+                        <span class="emoji">🚨</span><strong>Fraud Detection:</strong> Real-time probability scoring
+                    </div>
+                    <div class="sub-item applications-item">
+                        <span class="emoji">📊</span><strong>Portfolio Management:</strong> Risk-adjusted selections
+                    </div>
+                    <div class="sub-item applications-item">
+                        <span class="emoji">⏰</span><strong>Market Timing:</strong> Entry/exit signals
+                    </div>
+                    <div class="code-snippet">
+# Credit Risk Example
+default_risk = {
+    ('Retail', '<2yr'): 18%,  # HIGH
+    ('Tech', '>5yr'): 4%      # LOW
+}
+                    </div>
+                </div>
+                
+                <!-- Key Insights Branch -->
+                <div class="branch">
+                    <div class="branch-title insights">
+                        <span class="emoji">💡</span>Key Insights
+                    </div>
+                    <div class="sub-item insights-item">
+                        <span class="emoji">✅</span><strong>Pros:</strong> Fast, interpretable, works with small data
+                    </div>
+                    <div class="sub-item insights-item">
+                        <span class="emoji">⚠️</span><strong>Cons:</strong> Independence assumption, outlier sensitivity
+                    </div>
+                    <div class="sub-item insights-item">
+                        <span class="emoji">🎯</span><strong>Sweet Spot:</strong> AUC 0.55-0.65 for financial data
+                    </div>
+                    <div class="sub-item insights-item">
+                        <span class="emoji">🔍</span><strong>Use Case:</strong> Baseline before complex models
+                    </div>
+                    <div class="highlight">
+                        <strong>Financial Reality:</strong> Being roughly right with confidence beats being precisely wrong!
+                    </div>
+                </div>
+                
+                <!-- Practical Checklist Branch -->
+                <div class="branch">
+                    <div class="branch-title checklist">
+                        <span class="emoji">✅</span>Implementation Checklist
+                    </div>
+                    <div class="sub-item checklist-item">
+                        <span class="emoji">📋</span><strong>Data Prep:</strong> Log-transform ratios, chronological splits
+                    </div>
+                    <div class="sub-item checklist-item">
+                        <span class="emoji">🔧</span><strong>Model:</strong> Start simple, validate assumptions
+                    </div>
+                    <div class="sub-item checklist-item">
+                        <span class="emoji">📈</span><strong>Evaluation:</strong> Use AUC, not just accuracy
+                    </div>
+                    <div class="sub-item checklist-item">
+                        <span class="emoji">🚀</span><strong>Deployment:</strong> Real-time capable, interpretable outputs
+                    </div>
+                    <div class="sub-item checklist-item">
+                        <span class="emoji">🔄</span><strong>Monitoring:</strong> Regular retraining, performance tracking
+                    </div>
+                    <div class="code-snippet">
+# Success Criteria:
+# • AUC > 0.55 (beats random)
+# • < 10ms prediction time
+# • Stable across market cycles
+# • Measurable business impact
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.sub-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(10px) scale(1.02)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0) scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+        
+        // Add click effects for metrics
+        document.querySelectorAll('.metric').forEach(metric => {
+            metric.addEventListener('click', function() {
+                this.style.animation = 'pulse 0.6s ease-in-out';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 600);
+            });
+        });
+        
+        // Add floating animation to central node
+        const centralNode = document.querySelector('.central-node');
+        let floatDirection = 1;
+        
+        setInterval(() => {
+            centralNode.style.transform = `scale(1.1) translateY(${floatDirection * 3}px)`;
+            floatDirection *= -1;
+        }, 2000);
+    </script>
+</body>
+</html>
